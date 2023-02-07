@@ -1,1 +1,10 @@
-<p>report-component works!</p>
+<div class="main-conteiner">
+    <div class="conteiner">
+        <span>
+            Дата c которой формируется отчет: {{currentDate|date:'yyyy-MM-dd'}}
+        </span>
+        <button mat-raised-button (click)="GetReport()">
+            Выгрузить отчет
+        </button>
+    </div>
+</div>
