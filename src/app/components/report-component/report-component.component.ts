@@ -12,20 +12,27 @@ export class ReportComponentComponent implements OnInit {
 
   }
   currentDate: Date
+  loadingResponce: boolean = false;
   ngOnInit(): void {
     this.currentDate = new Date();
   }
   GetReport() {
+    this.loadingResponce = true;
     this.reportService.getReports().subscribe({
       next:
         response => {
-          let blob: any = new Blob([response], { type: 'text/json; charset=utf-8' });
-          const url = window.URL.createObjectURL(blob);
-          saveAs(blob, `${this.currentDate}.jpeg`);
+          // let blob: any = new Blob([response], { type: 'text/json; charset=utf-8' });
+          // const url = window.URL.createObjectURL(blob);
+          saveAs(response, `${this.currentDate}.xlsx`);
         },
       error:
         error => {
           console.log(error);
+          this.loadingResponce = false;
+        },
+      complete:
+        () => {
+          this.loadingResponce = false;
         }
     })
   }
