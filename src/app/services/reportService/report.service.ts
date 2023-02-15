@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/app/enveropment/enveropment';
 import { Observable } from 'rxjs';
+import { PostModel } from 'src/app/models/report-models/reportQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,19 @@ import { Observable } from 'rxjs';
 export class ReportService {
 
   constructor(private httpClient: HttpClient) { }
-  getReport = environment.apiUrl + 'CreateExcelFile';
-  getReports() {
-    console.log('get');
-    // return this.httpClient.get('http://httpbin.org/image/jpeg', { responseType: 'blob' });
-    return this.httpClient.post('http://192.168.1.122:7298/CreateExcelFile/', null, { responseType: 'blob' });
+  getReportMile = environment.apiUrl + 'CreateMileExcelFile/';
+  getReportNovosel = environment.apiUrl + 'CreateNovoselExcelFile';
+  getReportEmpty = environment.apiUrl + 'CreateExcelFile';
+  getReportsMile(data: PostModel) {
+    console.log(data)
+    return this.httpClient.post(this.getReportMile, data, { responseType: 'blob' });
+  }
+  getReportsNovosel(data: PostModel) {
+    console.log(data)
+    return this.httpClient.post(this.getReportNovosel, data, { responseType: 'blob' });
+  }
+  getReportsNull(data: PostModel) {
+    console.log(data)
+    return this.httpClient.post(this.getReportEmpty, data, { responseType: 'blob' });
   }
 }

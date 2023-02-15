@@ -1,11 +1,16 @@
 <div class="main">
-  <div class="navbar">
+  <div class="navbar" *ngIf="!isPathActiv('/login')">
     <span>
       LoyaltyReport
     </span>
+    <button mat-button [matMenuTriggerFor]="menu">Профиль</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>{{userName}}</button>
+      <button mat-menu-item (click)='onClickLogout()'>Log out</button>
+    </mat-menu>
   </div>
   <div class="conteiner">
-    <div class="menu">
+    <div class="menu" *ngIf="!isPathActiv('/login')">
       <button mat-raised-button routerLink="">Отчет по картам</button>
       <button mat-raised-button routerLink="phone">Выгрузка данных клиентов</button>
     </div>
