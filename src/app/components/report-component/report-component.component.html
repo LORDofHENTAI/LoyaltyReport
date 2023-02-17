@@ -1,7 +1,7 @@
 <div class="main-conteiner">
     <div class="conteiner">
         <span>
-            Дата c которой формируется отчет: {{currentDate|date:'yyyy-MM-dd'}}
+            Текущая Дата: {{currentDate|date:'dd.MM.yyyy'}}
         </span>
         <div class="control">
             <mat-form-field appearance="outline">
@@ -19,16 +19,13 @@
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field> -->
         </div>
-        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportMile()"
-            [disabled]="!reportDateStart">
+        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportMile()">
             Выгрузить отчет по милям
         </button>
-        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportNovosel()"
-            [disabled]="!reportDateStart">
+        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportNovosel()">
             Выгрузить отчет по новоселам
         </button>
-        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportNovosel()"
-            [disabled]="!reportDateStart">
+        <button mat-raised-button *ngIf="loadingResponce === false" (click)="GetReportNull()">
             Выгрузить отчет по обнуленным картам
         </button>
         <mat-progress-bar mode="indeterminate" *ngIf="loadingResponce === true"

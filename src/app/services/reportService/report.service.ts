@@ -11,8 +11,8 @@ export class ReportService {
 
   constructor(private httpClient: HttpClient) { }
   getReportMile = environment.apiUrl + 'CreateMileExcelFile/';
-  getReportNovosel = environment.apiUrl + 'CreateNovoselExcelFile';
-  getReportEmpty = environment.apiUrl + 'CreateExcelFile';
+  getReportNovosel = environment.apiUrl + 'CreateNovoselExcelFile/';
+  getReportEmpty = environment.apiUrl + 'CreateEmptyExcelFile/';
   getReportsMile(data: PostModel) {
     console.log(data)
     return this.httpClient.post(this.getReportMile, data, { responseType: 'blob' });

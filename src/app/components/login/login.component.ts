@@ -42,9 +42,13 @@ export class LoginComponent implements OnInit {
     this.loginService.getLogin(new LoginQuery(this.login, this.password)).subscribe({
       next: response => {
         if (this.checkResponse(response)) {
-          this.tokenService.setCookie(response);
-          this.tokenService.logEvent(true);
-          this.router.navigate(['/report']);
+          if (response.adminCount === '1' || response.department === 'Маркетинг') {
+            this.tokenService.setCookie(response);
+            this.tokenService.logEvent(true);
+            this.router.navigate(['/report']);
+          }
+          else
+            this.snackbarService.openSnackBar('Доступ запрещен', this.action, this.styleNoConnect);
         }
         else
           this.snackbarService.openSnackBar(this.messageFailLogin, this.action, this.styleNoConnect);

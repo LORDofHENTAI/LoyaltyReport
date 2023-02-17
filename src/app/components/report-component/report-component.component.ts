@@ -4,6 +4,7 @@ import { saveAs } from 'file-saver';
 import { FormGroup, FormControl } from '@angular/forms';
 import { PostModel } from 'src/app/models/report-models/reportQuery';
 import { TokenService } from 'src/app/services/token-service/token.service';
+import { formatDate } from '@angular/common';
 @Component({
   selector: 'app-report-component',
   templateUrl: './report-component.component.html',
@@ -13,14 +14,13 @@ export class ReportComponentComponent implements OnInit {
   constructor(private reportService: ReportService, private tokenService: TokenService) {
 
   }
-  currentDate: Date
+
   loadingResponce: boolean = false;
   reportDateStart: string
-  reportDateEnd: string
 
+  currentDate: Date
   ngOnInit(): void {
-    this.currentDate = new Date();
-    console.log(this.tokenService.getLogin())
+    this.currentDate = new Date()
   }
 
   GetReportMile() {
@@ -29,7 +29,7 @@ export class ReportComponentComponent implements OnInit {
       next:
         response => {
           console.log(response);
-          saveAs(response, `${this.currentDate}.xlsx`);
+          saveAs(response, `Отчет Миля ${this.reportDateStart}.xlsx`);
         },
       error:
         error => {
@@ -47,7 +47,7 @@ export class ReportComponentComponent implements OnInit {
     this.reportService.getReportsNovosel(new PostModel(this.tokenService.getToken(), this.reportDateStart, this.tokenService.getLogin())).subscribe({
       next:
         response => {
-          saveAs(response, `${this.currentDate}.xlsx`);
+          saveAs(response, `Отчет Новосел ${this.reportDateStart}.xlsx`);
         },
       error:
         error => {
@@ -65,7 +65,7 @@ export class ReportComponentComponent implements OnInit {
     this.reportService.getReportsNull(new PostModel(this.tokenService.getToken(), this.reportDateStart, this.tokenService.getLogin())).subscribe({
       next:
         response => {
-          saveAs(response, `${this.currentDate}.xlsx`);
+          saveAs(response, `Отчет обнуленные ${this.reportDateStart}.xlsx`);
         },
       error:
         error => {
