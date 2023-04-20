@@ -16,20 +16,21 @@ export class ReportComponentComponent implements OnInit {
   }
 
   loadingResponce: boolean = false;
-  reportDateStart: string
-
+  reportDateStart: Date = new Date()
+  nowFormatted: string;
   currentDate: Date
+
   ngOnInit(): void {
-    this.currentDate = new Date()
   }
 
   GetReportMile() {
     this.loadingResponce = true;
-    this.reportService.getReportsMile(new PostModel(this.tokenService.getToken(), this.reportDateStart, this.tokenService.getLogin())).subscribe({
+    this.nowFormatted = formatDate(this.reportDateStart, 'dd.MM.yyyy', 'en-US');
+    this.reportService.getReportsMile(new PostModel(this.tokenService.getToken(), this.nowFormatted, this.tokenService.getLogin())).subscribe({
       next:
         response => {
           console.log(response);
-          saveAs(response, `Отчет Миля ${this.reportDateStart}.xlsx`);
+          saveAs(response, `Отчет Миля ${this.nowFormatted}.xlsx`);
         },
       error:
         error => {
@@ -44,7 +45,8 @@ export class ReportComponentComponent implements OnInit {
   }
   GetReportNovosel() {
     this.loadingResponce = true;
-    this.reportService.getReportsNovosel(new PostModel(this.tokenService.getToken(), this.reportDateStart, this.tokenService.getLogin())).subscribe({
+    this.nowFormatted = formatDate(this.reportDateStart, 'dd.MM.yyyy', 'en-US');
+    this.reportService.getReportsNovosel(new PostModel(this.tokenService.getToken(), this.nowFormatted, this.tokenService.getLogin())).subscribe({
       next:
         response => {
           saveAs(response, `Отчет Новосел ${this.reportDateStart}.xlsx`);
@@ -62,7 +64,8 @@ export class ReportComponentComponent implements OnInit {
   }
   GetReportNull() {
     this.loadingResponce = true;
-    this.reportService.getReportsNull(new PostModel(this.tokenService.getToken(), this.reportDateStart, this.tokenService.getLogin())).subscribe({
+    this.nowFormatted = formatDate(this.reportDateStart, 'dd.MM.yyyy', 'en-US');
+    this.reportService.getReportsNull(new PostModel(this.tokenService.getToken(), this.nowFormatted, this.tokenService.getLogin())).subscribe({
       next:
         response => {
           saveAs(response, `Отчет обнуленные ${this.reportDateStart}.xlsx`);

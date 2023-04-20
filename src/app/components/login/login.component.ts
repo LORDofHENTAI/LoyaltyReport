@@ -41,8 +41,10 @@ export class LoginComponent implements OnInit {
 
     this.loginService.getLogin(new LoginQuery(this.login, this.password)).subscribe({
       next: response => {
+        console.log(response)
         if (this.checkResponse(response)) {
-          if (response.adminCount === '1' || response.department === 'Маркетинг') {
+          if (response.adminCount === '1' || response.title === 'Маркетинг') {
+
             this.tokenService.setCookie(response);
             this.tokenService.logEvent(true);
             this.router.navigate(['/report']);

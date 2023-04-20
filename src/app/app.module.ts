@@ -19,6 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMenuModule } from '@angular/material/menu';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatNativeDateModule,
     MatMenuModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, MatNativeDateModule, { provide: MAT_DATE_LOCALE, useValue: 'be-BY' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
